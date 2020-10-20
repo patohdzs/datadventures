@@ -6,10 +6,10 @@ This repository contains exploratory data science projects coded in Python, with
 
 - #### Real estate price prediction in Iowa
 
-  - Project focused on using a variety of ML alogrithms to predict house prices using data from Ames, Iowa. Predictions served as submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course)
+  - Project focused on using a variety of ML alogrithms to predict house prices using data from Ames, Iowa. Predictions served as submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course).
 
 - #### Cardiac arrest
-  - Project focused on using statistical techniqueds and ML to gain insight into the key factors behind heart failure fatality
+  - Project focused on using statistical techniques and ML to gain insights regarding the key factors behind heart failure fatality.
 
 ## Contact details:
 - Email: hdzsen.patricio@gmail.com
