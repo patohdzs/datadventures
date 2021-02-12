@@ -4,12 +4,12 @@ This repository contains exploratory data science projects coded in Python, with
 
 ## Current projects:
 
-- #### Real estate price forecasting in Iowa
+- #### Final Offer: Real estate price forecasting in Ames, Iowa
 
   - Project focused on using a variety of ML alogrithms to predict house prices using data from Ames, Iowa.
   - Predictions served as submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course).
 
-- #### Cardiac arrest
+- #### Cardiac arrest: 
   - Project focused on using statistical techniques and ML to gain insights regarding the key factors behind heart failure fatality.
   
 - #### America's favourite grocery store?
