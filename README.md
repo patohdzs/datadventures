@@ -4,13 +4,13 @@ This repository contains exploratory data science projects, with the purpose of 
 
 ## Current projects:
 
-- #### Final Offer: Real estate price forecasting in Ames, Iowa
+- #### Final Offer
 
-  - Project focused on using a variety of ML alogrithms to predict house prices using data from Ames, Iowa.
+  - Project focused on using a variety of ML supervised regression alogrithms to predict house prices using data from Ames, Iowa.
   - Predictions served as submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course).
 
 - #### Cardiac arrest: 
-  - Project focused on using statistical techniques and ML to gain insights regarding the key factors behind heart failure fatality.
+  - Project focused on using statistical techniques and supervised classification learning models to gain insights on the factors driving heart failure fatality.
   
 - #### (ONGOING) America's favourite grocery store?
   - Project aimed at forecasting weekly departmental sales across 45 different Walmart outlets in the US.
