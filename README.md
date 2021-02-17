@@ -12,8 +12,8 @@ This repository contains exploratory data science projects, with the purpose of 
 - #### Cardiac arrest: 
   - Project focused on using statistical techniques and ML to gain insights regarding the key factors behind heart failure fatality.
   
-- #### America's favourite grocery store?
-  - Ongoing project aimed at forecasting weekly departmental sales across 45 different Walmart outlets in the US.
+- #### (ONGOING) America's favourite grocery store?
+  - Project aimed at forecasting weekly departmental sales across 45 different Walmart outlets in the US.
   - Focus on developing EDA techniques and ML modelling for panel data.
   - Data provided by Walmart through the [Walmart Recruiting - Store Sales Forecasting Competion](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting/data) in Kaggle
 
