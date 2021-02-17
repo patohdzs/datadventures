@@ -1,6 +1,6 @@
-# Python Data Science projects
+# Data Science Adventures
 
-This repository contains exploratory data science projects coded in Python, with the purpose of documenting my learning and exploring a variety of statistical and machine learning techniques. Comments and suggestions are always welcome and greatly appreciated!
+This repository contains exploratory data science projects, with the purpose of documenting my learning. Comments and suggestions are always welcome and greatly appreciated!
 
 ## Current projects:
 
