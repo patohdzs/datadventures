@@ -6,15 +6,17 @@ This repository contains exploratory data science projects, with the purpose of 
 
 - #### Final Offer
 
-  - Project focused on using a variety of ML supervised regression alogrithms to predict house prices using data from Ames, Iowa.
-  - Predictions served as submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course).
+  - Project focused on forecasting house prices using data from Ames, Iowa.
+  - Uses a variety of regression models, including regularized regressions, gradient boosted trees, and random forests.
+  - Predictions served as submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course), placing in the top 1% of entries.
 
-- #### Cardiac arrest: 
-  - Project focused on using statistical techniques and supervised classification learning models to gain insights on the factors driving heart failure fatality.
+- #### Cardiac arrest 
+  - Project focused on using statistical techniques to gain insights on the factors driving heart failure fatality.
+  - Employs several , including KNN, logistic regression SVM, and random forests.
   
 - #### (ONGOING) America's favourite grocery store?
   - Project aimed at forecasting weekly departmental sales across 45 different Walmart outlets in the US.
-  - Focus on developing EDA techniques and ML modelling for panel data.
+  - Focus on developing EDA and modelling techniques for time series data.
   - Data provided by Walmart through the [Walmart Recruiting - Store Sales Forecasting Competion](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting/data) in Kaggle
 
 ## Contact details:
