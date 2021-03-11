@@ -8,7 +8,7 @@ This repository contains exploratory data science projects, with the purpose of 
 
   - Project focused on forecasting house prices using data from Ames, Iowa.
   - Uses a variety of regression models, including regularized regressions, gradient boosted trees, and random forests.
-  - Predictions served as submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course), placing in the top 1% of entries.
+  - Predictions placed in the top 1% of submissions [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course) 
 
 - #### Cardiac arrest 
   - Project focused on using statistical techniques to gain insights on the factors driving heart failure fatality.
