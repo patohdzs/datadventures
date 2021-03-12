@@ -7,10 +7,10 @@ This repository contains exploratory data science projects, with the purpose of 
 - #### [Final Offer](https://nbviewer.jupyter.org/github/patohdzs/data-science-adventures/blob/main/final-offer/residential-real-estate-price-prediction.ipynb)
 
   - Project focused on forecasting house prices using data from Ames, Iowa.
-  - Uses a variety of regression models, including regularized regressions, gradient boosted trees, and random forests.
+  - Uses a variety of models, including regularized regressions, gradient boosted trees, and random forests.
   - Predictions placed in the top 1% of submissions for the [Kaggle Housing Prices Competition](https://www.kaggle.com/c/home-data-for-ml-course) 
 
-- #### Cardiac arrest 
+- #### [Cardiac arrest](https://nbviewer.jupyter.org/github/patohdzs/data-science-adventures/blob/main/cardiac-arrest/heart-failure.ipynb) 
   - Project focused on using statistical techniques to gain insights on the factors driving heart failure fatality.
   - Employs several , including KNN, logistic regression SVM, and random forests.
   
