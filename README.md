@@ -4,7 +4,7 @@ This repository contains exploratory data science projects, with the purpose of 
 
 ## Current projects:
 
-- #### Final Offer
+- #### [Final Offer](https://nbviewer.jupyter.org/github/patohdzs/data-science-adventures/blob/main/final-offer/residential-real-estate-price-prediction.ipynb)
 
   - Project focused on forecasting house prices using data from Ames, Iowa.
   - Uses a variety of regression models, including regularized regressions, gradient boosted trees, and random forests.
