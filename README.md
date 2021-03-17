@@ -8,7 +8,7 @@ This repository contains exploratory data science projects, with the purpose of 
 
   - Project focused on forecasting house prices in the region of Ames, Iowa.
   - Uses a variety of models, including regularized regressions, gradient boosted trees, and random forests, as well as a final estimator stacking approach.
-  - Predictions placed in the top 1% of submissions for the [Kaggle Housing Prices Competition.](https://www.kaggle.com/c/home-data-for-ml-course)
+  - Predictions placed in the top 1% of submissions for the Housing Prices Competition for Kaggle Learn Users.
   - Data collected by Dean De Cock from individual residential property sales between 2006 - 2010. 
   - [Link to data set](http://jse.amstat.org/v19n3/decock.pdf) 
 
