@@ -20,7 +20,7 @@ This repository contains exploratory data science projects, with the purpose of 
 - #### (ONGOING) How Bad Dit It Shake?
   - Project aimed at predicting the level of building damages caused by the 2015 Gorkha earthquake in Nepal.
   - Focus on ordinal dependant variable models, assesed on a micro-averaged F1 score metric.
-  - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) and preprocessed by DrivenData for the Richter's Predictor: Modeling Earthquake Damage competition.  
+  - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) between Jan 2016 and May 2016 and preprocessed by DrivenData for the Richter's Predictor: Modeling Earthquake Damage competition.  
   - [Link to data set](https://www.drivendata.org/competitions/57/nepal-earthquake/page/134/)
   
 - #### (ONGOING) America's favourite grocery store?
