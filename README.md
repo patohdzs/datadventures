@@ -17,7 +17,7 @@ This repository contains exploratory data science projects, with the purpose of 
   - Data collected by the Faisalabad Institute of Cardiology at the Allied Hospital in Faisalabad between April – December 2015. 
   - [Link to data set](https://plos.figshare.com/articles/dataset/Survival_analysis_of_heart_failure_patients_A_case_study/5227684/1) 
 
-- #### (ONGOING) How Bad Dit It Shake?
+- #### (ONGOING) How Bad Did It Shake?
   - Project aimed at predicting the level of building damages caused by the 2015 Gorkha earthquake in Nepal.
   - Focus on ordinal dependant variable models, assesed on a micro-averaged F1 score metric.
   - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) between January - May 2016 and preprocessed by DrivenData for the Richter's Predictor: Modeling Earthquake Damage competition.  
