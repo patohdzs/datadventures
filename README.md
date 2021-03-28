@@ -4,7 +4,7 @@ This repository contains exploratory data science projects, with the purpose of 
 
 ## Current projects:
 
-- #### [Final Offer](https://nbviewer.jupyter.org/github/patohdzs/data-science-adventures/blob/main/final-offer/residential-real-estate-price-prediction.ipynb)
+- #### [Final Offer](https://nbviewer.jupyter.org/github/patohdzs/data-science-adventures/blob/main/final-offer/house-price-forecasting.ipynb)
   - Project focused on forecasting house prices in the region of Ames, Iowa.
   - Uses a variety of supervised learning models, including regularized regressions, gradient boosted trees, and random forests, as well as a final estimator stacking approach.
   - Predictions placed in the top 1% of submissions for the Kaggle Housing Prices Competition.
