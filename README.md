@@ -7,7 +7,7 @@ This repository contains exploratory data science projects, with the purpose of 
 - #### [Final Offer](https://nbviewer.jupyter.org/github/patohdzs/data-science-adventures/blob/main/final-offer/house-price-forecasting.ipynb)
   - Project focused on forecasting house prices in the region of Ames, Iowa.
   - Uses a variety of supervised learning models, including regularized regressions, gradient boosted trees, and random forests, as well as a final estimator stacking approach.
-  - Predictions placed in the top 1% of submissions for the Kaggle Housing Prices Competition.
+  - Predictions placed in the top 1% of submissions for the Kaggle Housing Prices competition.
   - Data collected by Dean De Cock from individual residential property sales between 2006 - 2010. 
   - [Link to data set](http://jse.amstat.org/v19n3/decock.pdf) 
 
@@ -17,10 +17,10 @@ This repository contains exploratory data science projects, with the purpose of 
   - Data collected by the Faisalabad Institute of Cardiology at the Allied Hospital in Faisalabad between April – December 2015. 
   - [Link to data set](https://plos.figshare.com/articles/dataset/Survival_analysis_of_heart_failure_patients_A_case_study/5227684/1) 
 
-- #### (ONGOING) How Bad Did It Shake?
-  - Project aimed at predicting the level of building damages caused by the 2015 Gorkha earthquake in Nepal.
-  - Focus on ordinal dependant variable models, assesed on a micro-averaged F1 score metric.
-  - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) between January - May 2016 and preprocessed by DrivenData for the Richter's Predictor: Modeling Earthquake Damage competition.  
+- #### Shakes and Quakes
+  - Project aimed at predicting the ordinal level of building damages caused by the 2015 Gorkha earthquake in Nepal.
+  - Predictions placed in the top 3% of submissions for the DrivenData Richter's Predictor: Modeling Earthquake Damage competition.
+  - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) between January - May 2016 and preprocessed by DrivenData.
   - [Link to data set](https://www.drivendata.org/competitions/57/nepal-earthquake/page/134/)
   
 - #### (ONGOING) America's favourite grocery store?
