@@ -18,7 +18,7 @@ This repository contains exploratory data science projects, with the purpose of 
   - [Link to data set](https://plos.figshare.com/articles/dataset/Survival_analysis_of_heart_failure_patients_A_case_study/5227684/1) 
 
 - #### Shakes and Quakes
-  - Project aimed at predicting the ordinal level of building damages caused by the 2015 Gorkha earthquake in Nepal.
+  - Project aimed at predicting the level of building damages caused by the 2015 Gorkha earthquake in Nepal.
   - Predictions placed in the top 3% of submissions for the DrivenData Richter's Predictor: Modeling Earthquake Damage competition.
   - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) between January - May 2016.
   - [Link to data set](https://www.drivendata.org/competitions/57/nepal-earthquake/page/134/)
