@@ -20,7 +20,7 @@ This repository contains exploratory data science projects, with the purpose of 
 - #### Shakes and Quakes
   - Project aimed at predicting the ordinal level of building damages caused by the 2015 Gorkha earthquake in Nepal.
   - Predictions placed in the top 3% of submissions for the DrivenData Richter's Predictor: Modeling Earthquake Damage competition.
-  - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) between January - May 2016 and preprocessed by DrivenData.
+  - Data was collected as part of the [2015 Nepal Earthquake Open Data Portal project](http://eq2015.npc.gov.np/#/about) between January - May 2016.
   - [Link to data set](https://www.drivendata.org/competitions/57/nepal-earthquake/page/134/)
   
 - #### (ONGOING) America's favourite grocery store?
