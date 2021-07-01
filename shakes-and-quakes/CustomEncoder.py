@@ -107,21 +107,20 @@ class LocationEncoder(BaseEstimator, TransformerMixin):
         
         mapping = {}
         # Indices are target values: prior[1] is proportion of obsvs. with target==1
-        prior = self._means = y.value_counts(normalize=True)
-        for p in prior:
-            ## TODO, insTEAD OF mean, get proportion for that p (maybe even get rid of for loop)
-            stats = y.groupby(X[col]).agg(['count', 'mean'])
-            
-            if col = 1:
-                smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
-                smoothing = prior * (1 - smoove) + stats['mean'] * smoove
-                smoothing[stats['count'] == 1] = prior
-                mapping[col] = smoothing #Change!!!!!
-            else:
-                smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
-                smoothing = prior * (1 - smoove) + stats['mean'] * smoove
-                smoothing[stats['count'] == 1] = prior
-            
+        priors = self._means = y.value_counts(normalize=True) 
+        new_stats = (y.groupby(X[self.cols[-1]])).value_counts(normalize=True)
+        
+        stats = y.groupby(X[col]).agg(['count', 'mean'])
+        if col = 1:
+            smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
+            smoothing = prior * (1 - smoove) + stats['mean'] * smoove
+            smoothing[stats['count'] == 1] = prior
+            mapping[col] = smoothing #Change!!!!!
+        else:
+            smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
+            smoothing = prior * (1 - smoove) + stats['mean'] * smoove
+            smoothing[stats['count'] == 1] = prior
+        
         #--------------------------------------------------------------------------------------------------------
 
         for switch in self.ordinal_encoder.category_mapping:
