@@ -2,13 +2,12 @@
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator
-from sklearn.preprocessing import OrdinalEncoder
-import category_encoders.utils as util
+from sklearn.base import TransformerMixin
 
 __author__ = 'patohdzs'
 
 
-class LocationEncoder(BaseEstimator, util.TransformerWithTargetMixin):
+class LocationEncoder(BaseEstimator, TransformerMixin):
     """Hierarchical target encoding for location features in Shakes and Quakes project.
 
     Supported targets:  polynomial.
@@ -38,36 +37,6 @@ class LocationEncoder(BaseEstimator, util.TransformerWithTargetMixin):
         smoothing effect to balance categorical average vs prior. Higher value means stronger regularization.
         The value must be strictly bigger than 0.
 
-    Example
-    -------
-    >>> from category_encoders import *
-    >>> import pandas as pd
-    >>> from sklearn.datasets import load_boston
-    >>> bunch = load_boston()
-    >>> y = bunch.target
-    >>> X = pd.DataFrame(bunch.data, columns=bunch.feature_names)
-    >>> enc = TargetEncoder(cols=['CHAS', 'RAD']).fit(X, y)
-    >>> numeric_dataset = enc.transform(X)
-    >>> print(numeric_dataset.info())
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 506 entries, 0 to 505
-    Data columns (total 13 columns):
-    CRIM       506 non-null float64
-    ZN         506 non-null float64
-    INDUS      506 non-null float64
-    CHAS       506 non-null float64
-    NOX        506 non-null float64
-    RM         506 non-null float64
-    AGE        506 non-null float64
-    DIS        506 non-null float64
-    RAD        506 non-null float64
-    TAX        506 non-null float64
-    PTRATIO    506 non-null float64
-    B          506 non-null float64
-    LSTAT      506 non-null float64
-    dtypes: float64(13)
-    memory usage: 51.5 KB
-    None
 
     References
     ----------
@@ -77,22 +46,15 @@ class LocationEncoder(BaseEstimator, util.TransformerWithTargetMixin):
 
     """
 
-    def __init__(self, verbose=0, drop_invariant=False, 
-                 min_samples_leaf=1, smoothing=1.0, categories='auto', 
-                 handle_unknown='error', unknown_value=None):
-        self.drop_invariant = drop_invariant
-        self.drop_cols = []
-        self.verbose = verbose
+    def __init__(self, min_samples_leaf=1, smoothing=1.0, categories='auto', 
+                 handle_unknown='error', unknown_value=None, cols, hierarchies):
         self.cols = cols
-        self.ordinal_encoder = None
+        self.hierarchies = hierarchies
         self.min_samples_leaf = min_samples_leaf
         self.smoothing = float(smoothing)  # Make smoothing a float so that python 2 does not treat as integer division
         self._dim = None
         self.mapping = None
-        self.handle_unknown = handle_unknown
-        self.handle_missing = handle_missing
-        self._mean = None
-        self.feature_names = None
+        self._means = None
 
     def fit(self, X, y):
         """Fit encoder according to X and y.
@@ -113,8 +75,8 @@ class LocationEncoder(BaseEstimator, util.TransformerWithTargetMixin):
         """
 
         # unite the input into pandas types
-        X = util.convert_input(X)
-        y = util.convert_input_vector(y, X.index)
+        X = pd.DataFrame(X)
+        y = pd.DataFrame(y, X.index)
 
         if X.shape[0] != y.shape[0]:
             raise ValueError("The length of X is " + str(X.shape[0]) + " but length of y is " + str(y.shape[0]) + ".")
@@ -127,179 +89,63 @@ class LocationEncoder(BaseEstimator, util.TransformerWithTargetMixin):
         else:
             self.cols = util.convert_cols_to_list(self.cols)
 
-        if self.handle_missing == 'error':
-            if X[self.cols].isnull().any().any():
-                raise ValueError('Columns to be encoded can not contain null')
-
-        self.ordinal_encoder = OrdinalEncoder(
-            cols=self.cols,
-            handle_unknown='value',
-            handle_missing='value'
-        )
-        self.ordinal_encoder = self.ordinal_encoder.fit(X)
-        X_ordinal = self.ordinal_encoder.transform(X)
-        self.mapping = self.fit_target_encoding(X_ordinal, y)
+        if X[self.cols].isnull().any().any():
+            raise ValueError('Columns to be encoded can not contain null')
+            
+        self.mapping = self.fit_target_encoding(X, y)
         
         X_temp = self.transform(X, override_return_df=True)
-        self.feature_names = list(X_temp.columns)
-
-        if self.drop_invariant:
-            self.drop_cols = []
-            X_temp = self.transform(X)
-            generated_cols = util.get_generated_cols(X, X_temp, self.cols)
-            self.drop_cols = [x for x in generated_cols if X_temp[x].var() <= 10e-5]
-            try:
-                [self.feature_names.remove(x) for x in self.drop_cols]
-            except KeyError as e:
-                if self.verbose > 0:
-                    print("Could not remove column from feature names."
-                    "Not found in generated cols.\n{}".format(e))
-
         return self
 
     
-    def fit_target_encoding(self, X, y):
+    def fit_target_encoding(self, X, y, col):
+        # This function creates map between current categories and new encoded vals
+        # For each 1,..., K categories, determines what replacement val is
+        # We want that, but 3, maybe recursive????
+        # Input col
+        #
+        
         mapping = {}
-
-        for switch in self.ordinal_encoder.category_mapping:
-            col = switch.get('col')
-            values = switch.get('mapping')
-
-            prior = self._mean = y.mean() #TODO ---- UPDATE FOR POLYNOMIAL TARGET
-            prior = self._mean = y.groupby().size() 
-
+        # Indices are target values: prior[1] is proportion of obsvs. with target==1
+        prior = self._means = y.value_counts(normalize=True)
+        for p in prior:
+            ## TODO, insTEAD OF mean, get proportion for that p (maybe even get rid of for loop)
             stats = y.groupby(X[col]).agg(['count', 'mean'])
-
-            smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
-            smoothing = prior * (1 - smoove) + stats['mean'] * smoove
-            smoothing[stats['count'] == 1] = prior
-
-            if self.handle_unknown == 'return_nan':
-                smoothing.loc[-1] = np.nan
-            elif self.handle_unknown == 'value':
-                smoothing.loc[-1] = prior
-
-            if self.handle_missing == 'return_nan':
-                smoothing.loc[values.loc[np.nan]] = np.nan
-            elif self.handle_missing == 'value':
-                smoothing.loc[-2] = prior
-
-            mapping[col] = smoothing
-
-        return mapping
-    
-    
-    
-    
-    
-    def fit_target_encoding(self, X, y):
-        mapping = {}
-
-        for switch in self.ordinal_encoder.category_mapping:
-            col = switch.get('col')
-            values = switch.get('mapping')
-
-            prior = self._mean = y.mean() #TODO ---- UPDATE FOR POLYNOMIAL TARGETT
-
-            stats = y.groupby(X[col]).agg(['count', 'mean'])
-
-            smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
-            smoothing = prior * (1 - smoove) + stats['mean'] * smoove
-            smoothing[stats['count'] == 1] = prior
-
-            if self.handle_unknown == 'return_nan':
-                smoothing.loc[-1] = np.nan
-            elif self.handle_unknown == 'value':
-                smoothing.loc[-1] = prior
-
-            if self.handle_missing == 'return_nan':
-                smoothing.loc[values.loc[np.nan]] = np.nan
-            elif self.handle_missing == 'value':
-                smoothing.loc[-2] = prior
-
-            mapping[col] = smoothing
-
-        return mapping
-
-    def transform(self, X, y=None, override_return_df=False):
-        """Perform the transformation to new categorical data.
-
-        Parameters
-        ----------
-        X : array-like, shape = [n_samples, n_features]
-        y : array-like, shape = [n_samples] when transform by leave one out
-            None, when transform without target info (such as transform test set)
             
-        Returns
-        -------
-        p : array, shape = [n_samples, n_numeric + N] #TODO: returns |y| columns, |y|
-            Transformed values with encoding applied.
+            if col = 1:
+                smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
+                smoothing = prior * (1 - smoove) + stats['mean'] * smoove
+                smoothing[stats['count'] == 1] = prior
+                mapping[col] = smoothing #Change!!!!!
+            else:
+                smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
+                smoothing = prior * (1 - smoove) + stats['mean'] * smoove
+                smoothing[stats['count'] == 1] = prior
+            
+        #--------------------------------------------------------------------------------------------------------
 
-        """
+        for switch in self.ordinal_encoder.category_mapping:
+            col = switch.get('col')
+            values = switch.get('mapping')
+            
+            # Indices are target values: prior[1] is proportion of obsvs. with target==1
+            prior = self._means = y.value_counts(normalize=True)
+            
+            stats = y.groupby(X[col]).agg(['count', 'mean'])
 
-        if self.handle_missing == 'error':
-            if X[self.cols].isnull().any().any():
-                raise ValueError('Columns to be encoded can not contain null')
+            smoove = 1 / (1 + np.exp(-(stats['count'] - self.min_samples_leaf) / self.smoothing))
+            smoothing = prior * (1 - smoove) + stats['mean'] * smoove
+            smoothing[stats['count'] == 1] = prior
+            
+            mapping[col] = smoothing
 
-        if self._dim is None:
-            raise ValueError('Must train encoder before it can be used to transform data.')
+        return mapping
+    
+    
+    
+    
+    
 
-        # unite the input into pandas types
-        X = util.convert_input(X)
-
-        # then make sure that it is the right size
-        if X.shape[1] != self._dim:
-            raise ValueError('Unexpected input dimension %d, expected %d' % (X.shape[1], self._dim,))
-
-        # if we are encoding the training data, we have to check the target
-        if y is not None:
-            y = util.convert_input_vector(y, X.index)
-            if X.shape[0] != y.shape[0]:
-                raise ValueError("The length of X is " + str(X.shape[0]) + " but length of y is " + str(y.shape[0]) + ".")
-
-        if not list(self.cols):
-            return X
-
-        X = self.ordinal_encoder.transform(X)
-
-        if self.handle_unknown == 'error':
-            if X[self.cols].isin([-1]).any().any():
-                raise ValueError('Unexpected categories found in dataframe')
-
-        X = self.target_encode(X)
-
-        if self.drop_invariant:
-            for col in self.drop_cols:
-                X.drop(col, 1, inplace=True)
-
-        if self.return_df or override_return_df:
-            return X
-        else:
-            return X.values
-
-
-    def target_encode(self, X_in):
-        X = X_in.copy(deep=True)
-
-        for col in self.cols:
-            X[col] = X[col].map(self.mapping[col])
-
-        return X
-
-    def get_feature_names(self):
-        """
-        Returns the names of all transformed / added columns.
-
-        Returns
-        -------
-        feature_names: list
-            A list with all feature names transformed or added.
-            Note: potentially dropped features are not included!
-
-        """
-
-        if not isinstance(self.feature_names, list):
-            raise ValueError('Must fit data first. Affected feature names are not known before.')
-        else:
-            return self.feature_names
+    
+    
 
