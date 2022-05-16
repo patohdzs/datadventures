@@ -1,4 +1,4 @@
-# Data Science Adventures
+# DatAdventures
 
 This repository contains exploratory data science projects, with the purpose of documenting my learning. Comments and suggestions are always welcome and greatly appreciated!
 
